@@ -125,6 +125,19 @@ require_once '../../db/conexao.php';
                     <div class="label-input">
                         <label for="toxico_humanos">Tóxico para Humanos:</label>
                         <select name="toxico_humanos" id="toxico_humanos">
+                            <option value="">Selecionar</option>
+                            <option value="SIM">Sim</option>
+                            <option value="NAO">Não</option>
+                        </select>
+                    </div>
+
+                    <!-- FALTA ADICIONAR A COLUNA NO BANCO DE DADOS 
+                         FALTA ADICIONAR NÓ CRUD  
+                    -->
+                    <div class="label-input">
+                        <label for="toxico_pets">Tóxico para Pets:</label>
+                        <select name="toxico_pets" id="toxico_pets">
+                            <option value="">Selecionar</option>
                             <option value="SIM">Sim</option>
                             <option value="NAO">Não</option>
                         </select>

@@ -1,7 +1,11 @@
 <?php
+require_once __DIR__ . '/../../config.php';
+require_once '../auth.php';
 require_once '../../db/conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $id = $_POST['id'];
 
     $nome_cientifico = $_POST['nome_cientifico'];
     $nome_popular = $_POST['nome_popular'];
@@ -23,16 +27,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $toxico_humanos = $_POST['toxico_humanos'];
     $toxico_pets = $_POST['toxico_pets'];
 
-    $sql = "INSERT INTO plantas (
-        nome_cientifico, nome_popular, filo, classe, ordem, familia, genero,
-        origem, luz_ideal, frequencia_rega, tipo_solo, temperatura_ideal,
-        umidade_ar, dificuldade, tamanho_altura, crescimento, floracao, toxico_humanos, toxico_pets
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "UPDATE plantas SET
+        nome_cientifico = ?, nome_popular = ?, filo = ?, classe = ?, ordem = ?, familia = ?, genero = ?,
+        origem = ?, luz_ideal = ?, frequencia_rega = ?, tipo_solo = ?, temperatura_ideal = ?,
+        umidade_ar = ?, dificuldade = ?, tamanho_altura = ?, crescimento = ?, floracao = ?, toxico_humanos = ?, toxico_pets = ?
+        WHERE id = ?";
 
     $stmt = $conn->prepare($sql);
 
     $stmt->bind_param(
-        "sssssssssssssssssss",
+        "sssssssssssssssssssi",
         $nome_cientifico,
         $nome_popular,
         $filo,
@@ -51,16 +55,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $crescimento,
         $floracao,
         $toxico_humanos,
-        $toxico_pets 
+        $toxico_pets,
+        $id
     );
 
     if ($stmt->execute()) {
-        echo "Planta cadastrada com sucesso!";
-
-        header("Location:../sucesso.html");
+        header("Location: listar.php?editado=1");
+        exit();
     } else {
-        echo "Erro ao cadastrar!";
+        echo "Erro ao atualizar!";
     }
 }
-
-?>

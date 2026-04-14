@@ -27,7 +27,8 @@ if ($resultado->num_rows > 0) {
         echo "<td>" . htmlspecialchars($planta['nome_cientifico']) . "</td>";
         echo "<td>
                 <a href='editar.php?id={$planta['id']}'>Editar</a> |
-                <a href='excluir.php?id={$planta['id']}' onclick='return confirm(\"Excluir?\")'>Excluir</a>
+                <a href='excluir.php?id={$planta['id']}' onclick='return confirm(\"Excluir?\")'>Excluir</a> |
+                <a href='escrever.php?id={$planta['id']}'>Escrever</a> 
               </td>";
         echo "</tr>";
     }

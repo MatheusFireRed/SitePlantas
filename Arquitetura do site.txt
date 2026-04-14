@@ -29,6 +29,7 @@ admin/
 		salvar.php
 		buscar.php
 		excluiur.php
+		atualizar.php
 	artigos/
 	includes/
 		menu-admin.php
