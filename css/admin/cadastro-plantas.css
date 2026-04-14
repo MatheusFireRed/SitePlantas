@@ -1,0 +1,48 @@
+body{
+    width: 100vw;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.linha{
+    width: 90%;
+    height: 500px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.linha-btn{
+    height: auto;
+
+}
+
+.btn-cadastrar{
+    height: 50px;
+    width: 200px;
+    cursor: pointer;
+}
+.coluna{
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    gap: 15px;
+}
+
+.label-input{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,30 @@
+body{
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.display-flex{
+    display: flex;
+}
+
+.width100{
+    width: 100%;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+
+input{
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.card{
+    width: 300px;
+    background-color: rgba(58, 184, 58, 0.664);
+    padding: 15px;
+    border-radius: 20px;
+}

@@ -1,0 +1,34 @@
+index.php
+login-admin.php
+config.php
+css/
+	admin/
+		admin.css
+		cadastro-plantas.css
+		listar-plantas.css
+		editar-plantas.css
+		menu-admin.css
+		dashboard.css
+		sucesso.css
+	reset.css
+js/
+assets/
+	fonts/
+	icons/
+db/
+	conexao.php
+images/
+admin/
+	dashboard.php
+	sucesso.php
+	auth.php
+	plantas/
+		cadastrar.php
+		editar.php
+		listar.php
+		salvar.php
+		buscar.php
+		excluiur.php
+	artigos/
+	includes/
+		menu-admin.php
