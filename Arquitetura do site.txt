@@ -10,8 +10,11 @@ css/
 		menu-admin.css
 		dashboard.css
 		sucesso.css
+		comentar.css
 	reset.css
 js/
+	admin/
+		comentarios.js
 assets/
 	fonts/
 	icons/
@@ -28,8 +31,9 @@ admin/
 		listar.php
 		salvar.php
 		buscar.php
-		excluiur.php
+		excluir.php
 		atualizar.php
+		comentar.php
 	artigos/
 	includes/
 		menu-admin.php

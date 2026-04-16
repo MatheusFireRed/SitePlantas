@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
         echo "Planta cadastrada com sucesso!";
 
-        header("Location:../sucesso.html");
+        header("Location:../includes/sucesso.html");
     } else {
         echo "Erro ao cadastrar!";
     }

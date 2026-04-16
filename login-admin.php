@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/reset.css">
 
     <!-- FOLHA DE ESTILO DA PÁGINA!-->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/admin.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/admin/admin.css">
 </head>
 <body class="display-flex flex-column">
     

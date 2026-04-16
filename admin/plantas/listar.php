@@ -59,7 +59,7 @@ $resultado = $conn->query($sql);
                                 |
                                 <a href="excluir.php?id=<?php echo $planta['id']?>;" onclick="return confirm('Tem certeza que deseja excluir ?')">Excluir</a>
                                 |
-                                <a href="#">Escrever</a>
+                                <a href="comentar.php?id=<?php echo $planta['id']?>">Escrever</a>
                             </td>
                         </tr>
 
