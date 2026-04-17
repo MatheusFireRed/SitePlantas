@@ -3,15 +3,7 @@ require_once '../../config.php';
 require_once '../../db/conexao.php';
 require_once '../auth.php';
 
-/* Selecionando nome da planta para mostrar na página */
-$sql = "SELECT nome_popular FROM plantas WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $planta_id);
-$stmt->execute();
-
-$resultado = $stmt->get_result();
-$planta = $resultado->fetch_assoc();
-
+// 🔹 validar ID primeiro
 if (!isset($_GET['id'])) {
     echo "ID da planta não informado!";
     exit();
@@ -19,13 +11,19 @@ if (!isset($_GET['id'])) {
 
 $planta_id = intval($_GET['id']);
 
-
+// 🔹 buscar planta
 $sql = "SELECT nome_popular FROM plantas WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $planta_id);
 $stmt->execute();
 
 $resultado = $stmt->get_result();
+
+if ($resultado->num_rows == 0) {
+    echo "Planta não encontrada!";
+    exit();
+}
+
 $planta = $resultado->fetch_assoc();
 ?>
 
@@ -55,7 +53,7 @@ $planta = $resultado->fetch_assoc();
         <h2>Adicionando conteúdo para:
             <?php echo htmlspecialchars($planta['nome_popular']); ?>
         </h2>
-        <form action="salvar-comentario.php" method="POST">
+        <form action="salvar-comentario.php" method="POST" enctype="multipart/form-data">
 
             <!-- ID da planta (oculto) -->
             <input type="hidden" name="planta_id" value="<?php echo $planta_id; ?>">
@@ -63,13 +61,13 @@ $planta = $resultado->fetch_assoc();
             <!-- Conteúdo dinâmico -->
             <div id="conteudo"></div>
 
-            <button type="button" onclick="adicionarSubtitulo()">
+            <button class="adc-subtitulo" type="button" onclick="adicionarSubtitulo()">
                 + Adicionar Subtítulo
             </button>
 
             <br><br>
 
-            <button type="submit">Salvar Conteúdo</button>
+            <button type="submit" id="btn-salvar">Salvar</button>
 
         </form>
 

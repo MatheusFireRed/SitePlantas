@@ -7,15 +7,15 @@ function adicionarSubtitulo() {
     let html = `
         <div class="subtitulo-bloco">
 
-            <input type="text" name="subtitulos[${indexSubtitulo}][titulo]" placeholder="Subtítulo">
+            <input class="input-subtitulo" type="text" name="subtitulos[${indexSubtitulo}][titulo]" placeholder="Subtítulo">
 
             <div class="textos"></div>
 
-            <button type="button" onclick="adicionarTexto(this, ${indexSubtitulo})">
+            <button class="btn-adc-texto-img" type="button" onclick="adicionarTexto(this, ${indexSubtitulo})">
                 + Texto
             </button>
 
-            <button type="button" onclick="adicionarImagem(this, ${indexSubtitulo})">
+            <button class="btn-adc-texto-img" type="button" onclick="adicionarImagem(this, ${indexSubtitulo})">
                 + Imagem
             </button>
 
@@ -33,7 +33,7 @@ function adicionarTexto(botao, index) {
     let bloco = botao.parentElement.querySelector(".textos");
 
     let html = `
-        <textarea name="subtitulos[${index}][textos][]" placeholder="Digite o texto"></textarea>
+        <textarea class="texto" name="subtitulos[${index}][textos][]" placeholder="Digite o texto"></textarea>
     `;
 
     bloco.insertAdjacentHTML("beforeend", html);
@@ -44,7 +44,7 @@ function adicionarImagem(botao, index) {
     let bloco = botao.parentElement.querySelector(".textos");
 
     let html = `
-        <input type="text" name="subtitulos[${index}][imagens][]" placeholder="URL da imagem">
+        <input type="file" name="subtitulos[${index}][imagens][]" accept="image/*">
     `;
 
     bloco.insertAdjacentHTML("beforeend", html);
