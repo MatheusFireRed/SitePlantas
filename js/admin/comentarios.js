@@ -44,7 +44,7 @@ function adicionarImagem(botao, index) {
     let bloco = botao.parentElement.querySelector(".textos");
 
     let html = `
-        <input type="file" name="subtitulos[${index}][imagens][]" accept="image/*">
+        <input type="file" class="input-img" name="subtitulos[${index}][imagens][]" accept="image/*">
     `;
 
     bloco.insertAdjacentHTML("beforeend", html);

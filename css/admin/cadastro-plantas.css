@@ -1,48 +1,64 @@
-body{
-    width: 100vw;
+:root {
+    /* BOTOES */
+    --cor-fundo-btn-adc-subtitulo: rgb(85, 187, 85);
+    --cor-fundo-btn-adc-subtitulo-hover: rgba(85, 187, 85, 0.616);
+
 }
 
-form{
+form {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-top: 20px;
 }
 
-main{
+main {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.linha{
+.linha {
     width: 90%;
     height: 500px;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
     gap: 50px;
 }
 
-.linha-btn{
+.linha-btn {
     height: auto;
 
 }
 
-.btn-cadastrar{
+.btn-cadastrar {
+    border-radius: 15px;
     height: 50px;
     width: 200px;
     cursor: pointer;
+    margin-bottom: 20px;
+    border: none;
+    font-weight: 500;
+    background-color: var(--cor-fundo-btn-adc-subtitulo);
+    transition: ease-in-out .5s;
 }
-.coluna{
+
+.btn-cadastrar:hover {
+    background-color: var(--cor-fundo-btn-adc-subtitulo-hover);
+    box-shadow: 2px 2px 2px 2px gray;
+
+}
+
+.coluna {
     display: flex;
     flex-direction: column;
     min-width: 300px;
     gap: 15px;
 }
 
-.label-input{
+.label-input {
     display: flex;
     flex-direction: column;
 }

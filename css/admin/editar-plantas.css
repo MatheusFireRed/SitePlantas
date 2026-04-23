@@ -1,6 +1,3 @@
-body{
-    width: 100vw;
-}
 
 form{
     width: 100%;
@@ -19,7 +16,6 @@ main{
 .linha{
     width: 90%;
     height: 500px;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
     gap: 50px;

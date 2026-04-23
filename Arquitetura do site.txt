@@ -11,6 +11,7 @@ css/
 		dashboard.css
 		sucesso.css
 		comentar.css
+		global.css
 	reset.css
 js/
 	admin/
@@ -21,20 +22,25 @@ assets/
 db/
 	conexao.php
 images/
+	plantas/
+	artigos/
 admin/
 	dashboard.php
 	sucesso.php
 	auth.php
 	plantas/
-		cadastrar.php
-		editar.php
-		listar.php
-		salvar.php
-		buscar.php
-		excluir.php
-		atualizar.php
-		comentar.php
-		salvar-comentario.php
+		pages/
+			listar.php
+			comentar.php
+			cadastrar.php
+			editar.php
+		actions/
+			salvar.php
+			buscar.php
+			excluir.php
+			atualizar.php
+			salvar-comentario.php
 	artigos/
 	includes/
 		menu-admin.php
+		sucesso.html
