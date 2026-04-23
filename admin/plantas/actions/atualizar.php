@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ .  '/../../auth.php';
 require_once __DIR__ . '/../../../db/conexao.php';
+require_once __DIR__ . '/../../includes/log.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -60,6 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     if ($stmt->execute()) {
+
+        registrarLog("ATUALIZAR", "PLANTAS", $id, "A PLANTA " . $nome_cientifico . "/" . $nome_popular . " FOI ATUALIZADA 
+         COM SUCESSO.");
+
         header("Location: " . BASE_URL_PAGES ."listar.php?editado=1");
         exit();
     } else {

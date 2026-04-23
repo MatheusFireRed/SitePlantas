@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../db/conexao.php';
 require_once __DIR__ . '/../../auth.php';
+require_once __DIR__ . '/../../includes/log.php';
+require_once __DIR__ . '/../../includes/busca-log.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: listar.php");
@@ -10,20 +12,25 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $planta_id = intval($_POST['planta_id']);
 
+/* BUSCA AS INFORMAÇÕES DA PLANTA PARA INSERIR NO LOG*/
+$planta = buscarInformacaoPlanta($planta_id, $conn);
+
 $uploadDir = "../../images/";
 
 foreach ($_POST['subtitulos'] as $i => $subtitulo) {
 
-    // 🔹 SALVAR SUBTÍTULO
+    //SALVAR SUBTÍTULO
     $titulo = $subtitulo['titulo'];
 
     $stmt = $conn->prepare("INSERT INTO subtitulos (planta_id, titulo) VALUES (?, ?)");
     $stmt->bind_param("is", $planta_id, $titulo);
     $stmt->execute();
 
+    registrarLog("INCLUIR", "SUBTITULOS", $planta_id, "O SUBTITULO -" . $titulo . " - FOI ADICIONADO A PLANTA " . $planta['nome_cientifico'] . "/" . $planta['nome_popular']);
+
     $subtitulo_id = $stmt->insert_id;
 
-    // 🔹 SALVAR TEXTOS
+    //SALVAR TEXTOS
     if (!empty($subtitulo['textos'])) {
 
         foreach ($subtitulo['textos'] as $texto) {
@@ -31,10 +38,12 @@ foreach ($_POST['subtitulos'] as $i => $subtitulo) {
             $stmt = $conn->prepare("INSERT INTO textos (subtitulo_id, conteudo) VALUES (?, ?)");
             $stmt->bind_param("is", $subtitulo_id, $texto);
             $stmt->execute();
+
+            registrarLog("INCLUIR", "TEXTOS", $planta['id'], "TEXTO ADICIONADO A PLANTA" . $planta['nome_cientifico'] . "/" . $planta['nome_popular']);
         }
     }
 
-    // 🔹 SALVAR IMAGENS
+    //SALVAR IMAGENS
     if (isset($_FILES['subtitulos']['name'][$i]['imagens'])) {
 
         foreach ($_FILES['subtitulos']['name'][$i]['imagens'] as $key => $nomeArquivo) {
@@ -43,7 +52,7 @@ foreach ($_POST['subtitulos'] as $i => $subtitulo) {
 
                 $tmp = $_FILES['subtitulos']['tmp_name'][$i]['imagens'][$key];
 
-                // 🔥 gerar nome único
+                // gerar nome único
                 $novoNome = uniqid() . "_" . basename($nomeArquivo);
 
                 $caminhoCompleto = $uploadDir . $novoNome;
@@ -57,6 +66,8 @@ foreach ($_POST['subtitulos'] as $i => $subtitulo) {
                 }
             }
         }
+
+        registrarLog("INCLUIR", "IMAGENS", $planta['id'], "FOI VINCULADA A IMAGEM A PLANTA " . $planta['nome_cientifico'] . "/" . $planta['nome_popular']);
     }
 }
 

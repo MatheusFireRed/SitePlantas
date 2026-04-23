@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../../config.php';
 require_once __DIR__ . '/../../../db/conexao.php';
+require_once __DIR__ . '/../../includes/log.php';
+require_once __DIR__ . '/../../includes/busca-log.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -56,6 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     if ($stmt->execute()) {
+
+        /* BUSCA AS INFORMAÇÕES DA PLANTA PARA INSERIR NO LOG*/
+        $planta = buscarInformacaoPlanta($nome_cientifico, $conn);
+
+        $id = $planta['id'];
+
+        registrarLog("CADASTRO", "PLANTAS", $id, "PLANTA " . $nome_cientifico . "/" . $nome_popular ." FOI ADICIONADA AO BANCO DE DADOS.");
+
         header("Location: " . BASE_URL_INCLUDES . "sucesso.html");
         exit();
     } else {

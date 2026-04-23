@@ -27,6 +27,10 @@ include '../config.php';
 
 
     <main>
+
+        <?php 
+            var_dump($_SESSION);
+        ?>
     </main>
 </body>
 

@@ -44,3 +44,4 @@ admin/
 	includes/
 		menu-admin.php
 		sucesso.html
+		log.php

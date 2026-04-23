@@ -1,6 +1,7 @@
 <?php
     include 'config.php';
     include 'db/conexao.php';
+    require_once __DIR__ . '/admin/includes/log.php';
 
     session_start();
 
@@ -21,6 +22,9 @@
         if (password_verify($senha, $user['senha'])) {
 
             $_SESSION['usuario_logado'] = $user['username'];
+            $_SESSION['id_usuario'] = $user['id'];
+
+            registrarLog("LOGAR", "USUARIOS", $_SESSION['id_usuario'], "USUARIO " . $usuario ." INICIOU A SESSAO...", "");
 
             header("Location: admin/dashboard.php");
             exit();
