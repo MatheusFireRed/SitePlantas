@@ -1,51 +1,72 @@
-let indexSubtitulo = 0;
+let contadorSubtitulo = 0;
 
 function adicionarSubtitulo() {
 
     let container = document.getElementById("conteudo");
 
     let html = `
-        <div class="subtitulo-bloco">
+        <div class="bloco-subtitulo">
 
-            <input class="input-subtitulo" type="text" name="subtitulos[${indexSubtitulo}][titulo]" placeholder="Subtítulo">
+            <input type="hidden" name="subtitulos[${contadorSubtitulo}][ordem]" value="${contadorSubtitulo}">
+
+            <input type="text"
+                   name="subtitulos[${contadorSubtitulo}][titulo]"
+                   class="input-subtitulo"
+                   placeholder="Subtítulo">
 
             <div class="textos"></div>
 
-            <button class="btn-adc-texto-img" type="button" onclick="adicionarTexto(this, ${indexSubtitulo})">
+            <button type="button" class="btn-adc-texto-img"
+                onclick="adicionarTexto(this, ${contadorSubtitulo})">
                 + Texto
             </button>
 
-            <button class="btn-adc-texto-img" type="button" onclick="adicionarImagem(this, ${indexSubtitulo})">
+            <button type="button" class="btn-adc-texto-img"
+                onclick="adicionarImagem(this, ${contadorSubtitulo})">
                 + Imagem
             </button>
 
-            <hr>
         </div>
     `;
 
     container.insertAdjacentHTML("beforeend", html);
 
-    indexSubtitulo++;
+    contadorSubtitulo++;
 }
 
 function adicionarTexto(botao, index) {
 
-    let bloco = botao.parentElement.querySelector(".textos");
+    let container = botao.parentElement.querySelector(".textos");
+    let ordem = container.children.length;
 
     let html = `
-        <textarea class="texto" name="subtitulos[${index}][textos][]" placeholder="Digite o texto"></textarea>
+        <textarea 
+            name="subtitulos[${index}][textos][${ordem}][conteudo]"
+            class="texto"
+            placeholder="Digite o texto..."></textarea>
+
+        <input type="hidden"
+            name="subtitulos[${index}][textos][${ordem}][ordem]"
+            value="${ordem}">
     `;
 
-    bloco.insertAdjacentHTML("beforeend", html);
+    container.insertAdjacentHTML("beforeend", html);
 }
 
 function adicionarImagem(botao, index) {
 
-    let bloco = botao.parentElement.querySelector(".textos");
+    let container = botao.parentElement.querySelector(".textos");
+    let ordem = container.children.length;
 
     let html = `
-        <input type="file" class="input-img" name="subtitulos[${index}][imagens][]" accept="image/*">
+        <input type="file"
+            name="subtitulos[${index}][imagens][${ordem}][arquivo]"
+            class="input-img">
+
+        <input type="hidden"
+            name="subtitulos[${index}][imagens][${ordem}][ordem]"
+            value="${ordem}">
     `;
 
-    bloco.insertAdjacentHTML("beforeend", html);
+    container.insertAdjacentHTML("beforeend", html);
 }

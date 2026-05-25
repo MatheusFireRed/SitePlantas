@@ -8,66 +8,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $id = $_POST['id'];
 
-    $nome_cientifico = $_POST['nome_cientifico'];
-    $nome_popular = $_POST['nome_popular'];
-    $filo = $_POST['filo'];
-    $classe = $_POST['classe'];
-    $ordem = $_POST['ordem'];
-    $familia = $_POST['familia'];
-    $genero = $_POST['genero'];
-    $origem = $_POST['origem'];
-    $luz_ideal = $_POST['luz_ideal'];
-    $frequencia_rega = $_POST['frequencia_rega'];
-    $tipo_solo = $_POST['tipo_solo'];
-    $temperatura_ideal = $_POST['temperatura_ideal'];
-    $umidade_ar = $_POST['umidade_ar'];
-    $dificuldade = $_POST['dificuldade'];
-    $tamanho_altura = $_POST['tamanho_altura'];
-    $crescimento = $_POST['crescimento'];
-    $floracao = $_POST['floracao'];
-    $toxico_humanos = $_POST['toxico_humanos'];
-    $toxico_pets = $_POST['toxico_pets'];
-
     $sql = "UPDATE plantas SET
-        nome_cientifico = ?, nome_popular = ?, filo = ?, classe = ?, ordem = ?, familia = ?, genero = ?,
-        origem = ?, luz_ideal = ?, frequencia_rega = ?, tipo_solo = ?, temperatura_ideal = ?,
-        umidade_ar = ?, dificuldade = ?, tamanho_altura = ?, crescimento = ?, floracao = ?, toxico_humanos = ?, toxico_pets = ?
-        WHERE id = ?";
+        nome_cientifico=?, nome_popular=?, filo=?, classe=?, ordem=?, familia=?, genero=?,
+        origem=?, luz_ideal=?, frequencia_rega=?, tipo_solo=?, temperatura_ideal=?,
+        umidade_ar=?, dificuldade=?, tamanho_altura=?, crescimento=?, floracao=?,
+        toxico_humanos=?, toxico_pets=?
+        WHERE id=?";
 
     $stmt = $conn->prepare($sql);
 
     $stmt->bind_param(
         "sssssssssssssssssssi",
-        $nome_cientifico,
-        $nome_popular,
-        $filo,
-        $classe,
-        $ordem,
-        $familia,
-        $genero,
-        $origem,
-        $luz_ideal,
-        $frequencia_rega,
-        $tipo_solo,
-        $temperatura_ideal,
-        $umidade_ar,
-        $dificuldade,
-        $tamanho_altura,
-        $crescimento,
-        $floracao,
-        $toxico_humanos,
-        $toxico_pets,
+        $_POST['nome_cientifico'],
+        $_POST['nome_popular'],
+        $_POST['filo'],
+        $_POST['classe'],
+        $_POST['ordem'],
+        $_POST['familia'],
+        $_POST['genero'],
+        $_POST['origem'],
+        $_POST['luz_ideal'],
+        $_POST['frequencia_rega'],
+        $_POST['tipo_solo'],
+        $_POST['temperatura_ideal'],
+        $_POST['umidade_ar'],
+        $_POST['dificuldade'],
+        $_POST['tamanho_altura'],
+        $_POST['crescimento'],
+        $_POST['floracao'],
+        $_POST['toxico_humanos'],
+        $_POST['toxico_pets'],
         $id
     );
+    registrarLog("ATUALIZAR", "PLANTAS", $id, "PLANTA " . $_POST['nome_cientifico'] . "/" . $_POST['nome_popular' . "Atualizada com sucesso."]);
+    $stmt->execute();
 
-    if ($stmt->execute()) {
 
-        registrarLog("ATUALIZAR", "PLANTAS", $id, "A PLANTA " . $nome_cientifico . "/" . $nome_popular . " FOI ATUALIZADA 
-         COM SUCESSO.");
+    /* SUBTITULOS E TEXTOS */
+    if (isset($_POST['subtitulos'])) {
 
-        header("Location: " . BASE_URL_PAGES ."listar.php?editado=1");
-        exit();
-    } else {
-        echo "Erro ao atualizar!";
+        foreach ($_POST['subtitulos'] as $sub) {
+
+            $stmtSub = $conn->prepare("UPDATE subtitulos SET titulo=? WHERE id=?");
+            $stmtSub->bind_param("si", $sub['titulo'], $sub['id']);
+            registrarLog("ATUALIZAR", "SUBTITULOS", $sub['id'], "Subtitulo " . $sub['titulo'] . " ATUALIZADO COM SUCESSO.");
+            $stmtSub->execute();
+
+            if (isset($sub['textos'])) {
+                foreach ($sub['textos'] as $txt) {
+
+                    $stmtTxt = $conn->prepare("UPDATE textos SET conteudo=? WHERE id=?");
+                    $stmtTxt->bind_param("sii", $txt['conteudo'], $txt['id']);
+                    registrarLog("ATUALIZAR", "TEXTOS", $txt['id'], "Texto Atualizado com sucesso.");
+                    $stmtTxt->execute();
+                }
+            }
+        }
     }
+
+    header("Location: " . BASE_URL_PAGES . "listar.php?editado=1");
+    exit();
 }

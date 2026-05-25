@@ -9,10 +9,10 @@ if (isset($_GET['id'])) {
     $id = intval($_GET['id']); // segurança básica
 
     /* PREPARA A CONSULTA PARA PEGAR AS INFORMAÇÕES PARA O LOG*/
-    $sql_inf_log = "SELECT * FROM plantas WHERE id = ?"; 
+    $sql_inf_log = "SELECT * FROM plantas WHERE id = ?";
     $stmt = $conn->prepare($sql_inf_log);
     $stmt->bind_param("i", $id);
-    $stmt-> execute();
+    $stmt->execute();
     $resultado = $stmt->get_result();
 
     $planta = $resultado->fetch_assoc();
@@ -21,12 +21,14 @@ if (isset($_GET['id'])) {
     $nome_popular = $planta['nome_popular'];
     $nome_cientifico = $planta['nome_cientifico'];
 
-    registrarLog("EXCLUIR", "PLANTAS", $id, "PLANTA " . $nome_cientifico . "/" . $nome_popular . " FOI EXCLUIDA DA TABELA.");
 
     /* PREPARA A CONSULTA PARA TELETAR DO BANCO DE DADOS  */
     $sql = "DELETE FROM plantas WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
+
+    registrarLog("EXCLUIR", "PLANTAS", $id, "PLANTA " . $nome_cientifico . "/" . $nome_popular . " FOI EXCLUIDA DO BANCO DE DADOS.");
+
 
     if ($stmt->execute()) {
 
@@ -35,7 +37,6 @@ if (isset($_GET['id'])) {
     } else {
         echo "Erro ao excluir planta!";
     }
-
 } else {
     echo "ID não informado!";
 }

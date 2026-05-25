@@ -11,19 +11,47 @@ if (!isset($_GET['id'])) {
 
 $id = intval($_GET['id']);
 
+/* BUSCAR PLANTA */
 $sql = "SELECT * FROM plantas WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
+$planta = $stmt->get_result()->fetch_assoc();
 
-$resultado = $stmt->get_result();
-
-if ($resultado->num_rows == 0) {
+if (!$planta) {
     echo "Planta não encontrada!";
     exit();
 }
 
-$planta = $resultado->fetch_assoc();
+/* BUSCAR SUBTITULOS + TEXTOS */
+$subtitulos = [];
+
+$sqlSub = "SELECT * FROM subtitulos WHERE planta_id = ?";
+$stmtSub = $conn->prepare($sqlSub);
+$stmtSub->bind_param("i", $id);
+$stmtSub->execute();
+$resultSub = $stmtSub->get_result();
+
+while ($sub = $resultSub->fetch_assoc()) {
+
+    $sqlTxt = "SELECT * FROM textos WHERE subtitulo_id = ?";
+    $stmtTxt = $conn->prepare($sqlTxt);
+    $stmtTxt->bind_param("i", $sub['id']);
+    $stmtTxt->execute();
+    $resultTxt = $stmtTxt->get_result();
+
+    $textos = [];
+
+    /*     print_r($textos);
+ */
+    while ($txt = $resultTxt->fetch_assoc()) {
+        $textos[] = $txt;
+    }
+
+    $sub['textos'] = $textos;
+    print_r($sub);
+    $subtitulos[] = $sub;
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,146 +60,174 @@ $planta = $resultado->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Planta</title>
 
     <!-- FOLHA DE ESTILO GLOBAL -->
     <link rel="stylesheet" href="<?php echo BASE_URL_CSS_ADMIN; ?>global.css">
 
-
-    <!-- ESTILO PÁGINA -->
-    <link rel="stylesheet" href="<?php echo  BASE_URL_CSS_ADMIN; ?>editar-plantas.css">
-
+    <!-- ESTILO DA PÁGINA -->
+    <link rel="stylesheet" href="<?php echo BASE_URL_CSS_ADMIN; ?>editar-plantas.css">
 </head>
 
 <body>
 
-
-    <?php
-    include "../../includes/menu-admin.php";
-    ?>
+    <?php include "../../includes/menu-admin.php"; ?>
 
     <main>
         <form action="<?php echo BASE_URL_ACTIONS; ?>atualizar.php" method="POST">
 
             <div class="linha">
-                <input type="hidden" name="id" value="<?php echo $planta['id']; ?>">
+
+                <input type="hidden" name="id" value="<?= $planta['id']; ?>">
 
                 <div class="coluna">
                     <div class="label-input">
-                        <label for="nome_cientifico">Nome Ciêntifico:</label>
-                        <input type="text" id="nome_cientifico" name="nome_cientifico" value="<?php echo htmlspecialchars($planta['nome_cientifico']); ?>">
+                        <label>Nome Científico:</label>
+                        <input type="text" name="nome_cientifico" value="<?= htmlspecialchars($planta['nome_cientifico']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="nome_popular">Nome Popular:</label>
-                        <input type="text" id="nome_popular" name="nome_popular" value="<?php echo htmlspecialchars($planta['nome_popular']); ?>">
+                        <label>Nome Popular:</label>
+                        <input type="text" name="nome_popular" value="<?= htmlspecialchars($planta['nome_popular']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="filo">Filo:</label>
-                        <input type="text" id="filo" name="filo" value="<?php echo htmlspecialchars($planta['filo']); ?>">
+                        <label>Filo:</label>
+                        <input type="text" name="filo" value="<?= htmlspecialchars($planta['filo']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="classe">Classe:</label>
-                        <input type="text" id="classe" name="classe" value="<?php echo htmlspecialchars($planta['classe']); ?>">
+                        <label>Classe:</label>
+                        <input type="text" name="classe" value="<?= htmlspecialchars($planta['classe']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="ordem">Ordem:</label>
-                        <input type="text" id="ordem" name="ordem" value="<?php echo htmlspecialchars($planta['ordem']); ?>">
+                        <label>Ordem:</label>
+                        <input type="text" name="ordem" value="<?= htmlspecialchars($planta['ordem']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="familia">Família:</label>
-                        <input type="text" id="familia" name="familia" value="<?php echo htmlspecialchars($planta['familia']); ?>">
+                        <label>Família:</label>
+                        <input type="text" name="familia" value="<?= htmlspecialchars($planta['familia']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="genero">Gênero:</label>
-                        <input type="text" id="genero" name="genero" value="<?php echo htmlspecialchars($planta['genero']); ?>">
+                        <label>Gênero:</label>
+                        <input type="text" name="genero" value="<?= htmlspecialchars($planta['genero']); ?>">
                     </div>
                 </div>
 
                 <div class="coluna">
                     <div class="label-input">
-                        <label for="origem">Origem:</label>
-                        <input type="text" id="origem" name="origem" value="<?php echo htmlspecialchars($planta['origem']); ?>">
+                        <label>Origem:</label>
+                        <input type="text" name="origem" value="<?= htmlspecialchars($planta['origem']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="luz_ideal">Luz ideal:</label>
-                        <input type="text" id="luz_ideal" name="luz_ideal" value="<?php echo htmlspecialchars($planta['luz_ideal']); ?>">
+                        <label>Luz ideal:</label>
+                        <input type="text" name="luz_ideal" value="<?= htmlspecialchars($planta['luz_ideal']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="frequencia_rega">Frequência de Rega:</label>
-                        <input type="text" id="frequencia_rega" name="frequencia_rega" value="<?php echo htmlspecialchars($planta['frequencia_rega']); ?>">
+                        <label>Frequência de Rega:</label>
+                        <input type="text" name="frequencia_rega" value="<?= htmlspecialchars($planta['frequencia_rega']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="tipo_solo">Tipo de Solo:</label>
-                        <input type="text" id="tipo_solo" name="tipo_solo" value="<?php echo htmlspecialchars($planta['tipo_solo']); ?>">
+                        <label>Tipo de Solo:</label>
+                        <input type="text" name="tipo_solo" value="<?= htmlspecialchars($planta['tipo_solo']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="temperatura_ideal">Temperatura Ideal:</label>
-                        <input type="text" id="temperatura_ideal" name="temperatura_ideal" value="<?php echo htmlspecialchars($planta['temperatura_ideal']); ?>">
+                        <label>Temperatura Ideal:</label>
+                        <input type="text" name="temperatura_ideal" value="<?= htmlspecialchars($planta['temperatura_ideal']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="umidade_ar">Umidade do Ar:</label>
-                        <input type="text" id="umidade_ar" name="umidade_ar" value="<?php echo htmlspecialchars($planta['umidade_ar']); ?>">
+                        <label>Umidade do Ar:</label>
+                        <input type="text" name="umidade_ar" value="<?= htmlspecialchars($planta['umidade_ar']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="dificuldade">Dificuldade:</label>
-                        <input type="text" id="dificuldade" name="dificuldade" value="<?php echo htmlspecialchars($planta['dificuldade']); ?>">
+                        <label>Dificuldade:</label>
+                        <input type="text" name="dificuldade" value="<?= htmlspecialchars($planta['dificuldade']); ?>">
                     </div>
                 </div>
 
                 <div class="coluna">
                     <div class="label-input">
-                        <label for="tamanho_altura">Altura da Planta:</label>
-                        <input type="text" id="tamanho_altura" name="tamanho_altura" value="<?php echo htmlspecialchars($planta['tamanho_altura']); ?>">
+                        <label>Altura:</label>
+                        <input type="text" name="tamanho_altura" value="<?= htmlspecialchars($planta['tamanho_altura']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="crescimento">Crescimento:</label>
-                        <input type="text" id="crescimento" name="crescimento" value="<?php echo htmlspecialchars($planta['crescimento']); ?>">
+                        <label>Crescimento:</label>
+                        <input type="text" name="crescimento" value="<?= htmlspecialchars($planta['crescimento']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="floracao">Floração:</label>
-                        <input type="text" id="floracao" name="floracao" value="<?php echo htmlspecialchars($planta['floracao']); ?>">
+                        <label>Floração:</label>
+                        <input type="text" name="floracao" value="<?= htmlspecialchars($planta['floracao']); ?>">
                     </div>
 
                     <div class="label-input">
-                        <label for="toxico_humanos">Tóxico para Humanos:</label>
-                        <select name="toxico_humanos" id="toxico_humanos">
-                            <option value="">Selecionar</option>
-                            <option value="SIM" <?php if ($planta['toxico_humanos'] == 'SIM') echo 'selected' ?>>Sim</option>
-                            <option value="NAO" <?php if ($planta['toxico_humanos'] == 'NAO') echo 'selected' ?>>Não</option>
+                        <label>Tóxico Humanos:</label>
+                        <select name="toxico_humanos">
+                            <option value="SIM" <?= $planta['toxico_humanos'] == 'SIM' ? 'selected' : '' ?>>Sim</option>
+                            <option value="NAO" <?= $planta['toxico_humanos'] == 'NAO' ? 'selected' : '' ?>>Não</option>
                         </select>
                     </div>
 
-                    <!-- FALTA ADICIONAR A COLUNA NO BANCO DE DADOS 
-                         FALTA ADICIONAR NÓ CRUD  
-                    -->
                     <div class="label-input">
-                        <label for="toxico_pets">Tóxico para Pets:</label>
-                        <select name="toxico_pets" id="toxico_pets">
-                            <option value="">Selecionar</option>
-                            <option value="SIM" <?php if ($planta['toxico_pets'] == 'SIM') echo 'selected' ?>>Sim</option>
-                            <option value="NAO" <?php if ($planta['toxico_pets'] == 'NAO') echo 'selected' ?>>Não</option>
+                        <label>Tóxico Pets:</label>
+                        <select name="toxico_pets">
+                            <option value="SIM" <?= $planta['toxico_pets'] == 'SIM' ? 'selected' : '' ?>>Sim</option>
+                            <option value="NAO" <?= $planta['toxico_pets'] == 'NAO' ? 'selected' : '' ?>>Não</option>
                         </select>
                     </div>
                 </div>
+
             </div>
+
+            <!-- SUBTITULOS -->
+
+            <div class="linha">
+                <h1>Subtítulos e Textos</h1>
+            </div>
+
+            <?php foreach ($subtitulos as $i => $sub): ?>
+
+                <div class="linha">
+                    <div class="bloco-sub">
+                        <input type="hidden" name="subtitulos[<?= $i ?>][id]" value="<?= $sub['id'] ?>">
+
+                        <div class="box-input-btns">
+                            <input type="text" name="subtitulos[<?= $i ?>][titulo]" value="<?= $sub['titulo'] ?>">
+
+                            <div class="btns">
+                                <button>Excluir</button>
+                            </div>
+                        </div>
+
+                        <?php foreach ($sub['textos'] as $j => $texto): ?>
+
+                            <input type="hidden" name="subtitulos[<?= $i ?>][textos][<?= $j ?>][id]" value="<?= $texto['id'] ?>">
+
+                            <textarea name="subtitulos[<?= $i ?>][textos][<?= $j ?>][conteudo]"><?= $texto['conteudo'] ?></textarea>
+
+                        <?php endforeach; ?>
+
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+
             <div class="linha linha-btn">
                 <input class="btn-cadastrar" type="submit" value="Atualizar Planta">
             </div>
+
         </form>
+
     </main>
 
 </body>
