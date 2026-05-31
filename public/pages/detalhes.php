@@ -38,7 +38,12 @@ $resultado = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $item['nome_cientifico'] . " / " . $item['nome_popular']; ?></title>
 
+    <!-- FOLHA DE ESTILO MENU -->
     <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . 'menu-public.css'; ?>">
+
+    <!-- FOLHA DE ESTILO PÁGINA -->
+    <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . "detalhes.css" ?>">
+
 </head>
 
 <body>
@@ -46,8 +51,7 @@ $resultado = mysqli_query($conn, $sql);
     <?php include '../includes/menu-public.php'; ?>
 
     <main>
-
-        <h1>
+        <h1 id="nome_planta">
             <?php echo $item['nome_cientifico'] . " / " . $item['nome_popular']; ?>
         </h1>
 
@@ -57,174 +61,170 @@ $resultado = mysqli_query($conn, $sql);
         </p>
 
         <div class="linha">
+            <div class="coluna">
+                <table>
+                    <tr>
+                        <th>
+                            Nome Cientifico:
+                        </th>
+                        <td>
+                            <?php echo $item['nome_cientifico'] ?>
+                        </td>
+                    </tr>
 
-            <!--TABELA DE INFORMAÇÕES-->
-            <style>
-                table th{
-                    text-align: start;
-                    padding: 0px 30px 0px 0px;
-                }
+                    <tr>
+                        <th>
+                            Nome Popular:
+                        </th>
+                        <td>
+                            <?php echo $item['nome_popular'] ?>
+                        </td>
+                    </tr>
 
-                table, th, tr, td{
-                    border: 1px solid black;
-                }
-            </style>
-            <table>
-                <tr>
-                    <th>
-                        Nome Cientifico:
-                    </th>
-                    <td>
-                        <?php echo $item['nome_cientifico'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Filo:
+                        </th>
+                        <td>
+                            <?php echo $item['filo'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Nome Popular:
-                    </th>
-                    <td>
-                        <?php echo $item['nome_popular'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Classe:
+                        </th>
+                        <td>
+                            <?php echo $item['classe'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Filo:
-                    </th>
-                    <td>
-                        <?php echo $item['filo'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Ordem:
+                        </th>
+                        <td>
+                            <?php echo $item['ordem'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Classe:
-                    </th>
-                    <td>
-                        <?php echo $item['classe'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Familia:
+                        </th>
+                        <td>
+                            <?php echo $item['familia'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Ordem:
-                    </th>
-                    <td>
-                        <?php echo $item['ordem'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Gênero:
+                        </th>
+                        <td>
+                            <?php echo $item['genero'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Familia:
-                    </th>
-                    <td>
-                        <?php echo $item['familia'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Origem:
+                        </th>
+                        <td>
+                            <?php echo $item['origem'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Gênero:
-                    </th>
-                    <td>
-                        <?php echo $item['genero'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Luminosidade Ideal:
+                        </th>
+                        <td>
+                            <?php echo $item['luz_ideal'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Origem:
-                    </th>
-                    <td>
-                        <?php echo $item['origem'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Frequência de Rega:
+                        </th>
+                        <td>
+                            <?php echo $item['frequencia_rega'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Luminosidade Ideal:
-                    </th>
-                    <td>
-                        <?php echo $item['luz_ideal'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Tipo de Solo:
+                        </th>
+                        <td>
+                            <?php echo $item['tipo_solo'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Frequência de Rega:
-                    </th>
-                    <td>
-                        <?php echo $item['frequencia_rega'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Temperatura Ideal:
+                        </th>
+                        <td>
+                            <?php echo $item['temperatura_ideal'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Tipo de Solo:
-                    </th>
-                    <td>
-                        <?php echo $item['tipo_solo'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Umidade do Ar:
+                        </th>
+                        <td>
+                            <?php echo $item['umidade_ar'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Temperatura Ideal:
-                    </th>
-                    <td>
-                        <?php echo $item['temperatura_ideal'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Dificuldade:
+                        </th>
+                        <td>
+                            <?php echo $item['dificuldade'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Umidade do Ar:
-                    </th>
-                    <td>
-                        <?php echo $item['umidade_ar'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Floração:
+                        </th>
+                        <td>
+                            <?php echo $item['floracao'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Dificuldade:
-                    </th>
-                    <td>
-                        <?php echo $item['dificuldade'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Tóxico para Humanos:
+                        </th>
+                        <td>
+                            <?php echo $item['toxico_humanos'] ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        Floração:
-                    </th>
-                    <td>
-                        <?php echo $item['floracao'] ?>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>
-                        Tóxico para Humanos:
-                    </th>
-                    <td>
-                        <?php echo $item['toxico_humanos'] ?>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>
-                        Tóxico para Pets:
-                    </th>
-                    <td>
-                        <?php echo $item['toxico_pets'] ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>
+                            Tóxico para Pets:
+                        </th>
+                        <td>
+                            <?php echo $item['toxico_pets'] ?>
+                        </td>
+                    </tr>
 
 
-            </table>
+                </table>
+
+            </div>
+
+            <div class="coluna">
+                <!-- NÃO ESTÁ FUNCIONANDO A IMAGEM  -->
+                <img src="<?php echo BASE_URL_IMAGES_PLANTAS . "img-teste.png" ?>" alt="" width="200px">
+            </div>
         </div>
 
         <?php
@@ -233,20 +233,20 @@ $resultado = mysqli_query($conn, $sql);
 
             <h2><?php echo $subtitulo['titulo']; ?></h2>
 
-            <?php 
-                $subtitulo_id = $subtitulo['id'];
+            <?php
+            $subtitulo_id = $subtitulo['id'];
 
-                $sqlTexto = "SELECT conteudo FROM textos WHERE subtitulo_id = $subtitulo_id ORDER BY ordem";
+            $sqlTexto = "SELECT conteudo FROM textos WHERE subtitulo_id = $subtitulo_id ORDER BY ordem";
 
-                $resultadoTexto = mysqli_query($conn, $sqlTexto);
+            $resultadoTexto = mysqli_query($conn, $sqlTexto);
 
-                while($texto = mysqli_fetch_assoc($resultadoTexto)):
+            while ($texto = mysqli_fetch_assoc($resultadoTexto)):
             ?>
 
-            <p>
-                <?php echo $texto['conteudo']?>
-            </p>
-        <?php endwhile; ?>
+                <p>
+                    <?php echo $texto['conteudo'] ?>
+                </p>
+            <?php endwhile; ?>
         <?php endwhile; ?>
     </main>
 

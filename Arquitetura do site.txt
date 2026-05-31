@@ -1,7 +1,13 @@
 index.php
 login-admin.php
 config.php
+
+public/
+	includes/
+		menu-public.php
+
 css/
+	public/
 	admin/
 		admin.css
 		cadastro-plantas.css

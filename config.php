@@ -14,5 +14,6 @@
     define('BASE_URL_ICONS', BASE_URL . "assets/icons/");
     define('BASE_URL_PUBLIC_INCLUDES', BASE_URL . 'public/includes/');
     define('BASE_URL_PUBLIC_PAGES', BASE_URL . 'public/pages/');
+    define('BASE_URL_IMAGES_PLANTAS', BASE_URL . "images/plantas/");
     
 ?>

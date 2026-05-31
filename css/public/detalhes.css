@@ -1,0 +1,44 @@
+:root {}
+
+
+
+main{
+    width: 100%;
+    padding: 20px;
+    margin-left: 82px;
+}
+
+
+#nome_planta {
+    padding: 20px 20px 20px 0px;
+    border-radius: 0px 20px 20px 0px;
+    background-color: green;
+}
+
+/* TABELA DE INFORMAÇÕES */
+table th {
+    text-align: start;
+    padding: 0px 30px 0px 0px;
+}
+
+table{
+    width: 100%;
+}
+
+table,
+th,
+tr,
+td {
+    border: 1px solid black;
+}
+
+.linha {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.coluna {
+    width: 100%;
+    border: 1px solid red;
+}
+
