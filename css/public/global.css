@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --fonte-principal: "Montserrat", sans-serif;
+
+    --cor-fundo-pagina: #e3e9f7;
+}
+
+
+* {
+    font-family: var(--fonte-principal);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--cor-fundo-pagina);
+}
+
+main{
+    width: 100%;
+    padding: 20px;
+    margin-left: 82px;
+}
+
+/* INICIO CLASSES UTILITÁRIAS */
+
+.display-flex {
+    display: flex;
+}
+
+/* FIM CLASSES UTILITÁRIAS */
+
+
+.linha{
+    width: 100%;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+/* ======================================================================= */
+
+
+

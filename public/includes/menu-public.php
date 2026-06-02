@@ -1,8 +1,8 @@
-<nav id="sidebar">
+<nav id="sidebar" class="display-flex">
     <div id="sidebar_content">
-        <div id="user">
+        <div id="user" class="display-flex">
             <img src="<?php echo BASE_URL_ICONS . "logo.png" ?>" alt="Avatar">
-            <p id="user_infos">
+            <p id="user_infos" class="display-flex">
                 <span class="item-description">
                     Plante-se
                 </span>
@@ -12,10 +12,10 @@
             </p>
         </div>
 
-        <ul id="side_items">
+        <ul id="side_items" class="display-flex">
             <li class="side-item active">
-                <a href="<?php echo BASE_URL . "index.php"?>">
-                    <img src="<?php echo BASE_URL_ICONS . "list.svg" ?>" alt="Icone para expandir menu.">
+                <a class="display-flex" href="<?php echo BASE_URL . "index.php"?>">
+                    <img class="display-flex" src="<?php echo BASE_URL_ICONS . "list.svg" ?>" alt="Icone para expandir menu.">
                     <span class="item-description">
                         Início
                     </span>
@@ -23,8 +23,8 @@
             </li>
 
             <li class="side-item">
-                <a href="#">
-                    <img src="<?php echo BASE_URL_ICONS . "flower3.svg" ?>" alt="Icone para expandir menu.">
+                <a class="display-flex" href="#">
+                    <img class="display-flex" src="<?php echo BASE_URL_ICONS . "flower3.svg" ?>" alt="Icone para expandir menu.">
                     <span class="item-description">
                         Plantas
                     </span>
@@ -32,8 +32,8 @@
             </li>
 
             <li class="side-item">
-                <a href="#">
-                    <img src="<?php echo BASE_URL_ICONS . "journal.svg" ?>" alt="Icone para expandir menu.">
+                <a class="display-flex" href="#">
+                    <img class="display-flex" src="<?php echo BASE_URL_ICONS . "journal.svg" ?>" alt="Icone para expandir menu.">
                     <span class="item-description">
                         Artigos
                     </span>
@@ -47,7 +47,7 @@
 
     </div>
     <div id="logout">
-        <button id="logout_btn">
+        <button id="logout_btn" class="display-flex">
             <img src="<?php echo BASE_URL_ICONS . "box-arrow-left.svg" ?>" alt="Botão de logout.">
             <span class="item-description">
                 Logout

@@ -19,7 +19,13 @@ $resultado = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plante-se - </title>
 
+    <!-- FOLHA DE ESTILO CSS GLOBAL -->
+    <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . 'global.css' ?>">
+
+    <!-- FOLHA DE ESTILO CSS MENU -->
     <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . 'menu-public.css' ?>">
+
+    <!-- FOLHA DE ESTILO PÁGINA -->
     <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . 'index.css' ?>">
 </head>
 <?php
@@ -27,12 +33,12 @@ $resultado = mysqli_query($conn, $sql);
 include 'public/includes/menu-public.php';
 ?>
 
-<body>
+<body class="display-flex">
 
-    <main>
-        <h1 class="linha">Bem-vindo!</h1>
+    <main class="display-flex">
+        <h1 class="linha display-flex">Bem-vindo!</h1>
 
-        <div class="linha">
+        <div class="linha display-flex">
             <?php while ($item = mysqli_fetch_assoc($resultado)): ?>
                 <a href="<?php echo BASE_URL_PUBLIC_PAGES ?>detalhes.php?id=<?php echo $item['id']; ?>">
 

@@ -1,21 +1,15 @@
-:root {}
+:root {
 
-
-
-main{
-    width: 100%;
-    padding: 20px;
-    margin-left: 82px;
+    --cor-fundo-nome-cientifico: green;
 }
-
 
 #nome_planta {
-    padding: 20px 20px 20px 0px;
+    padding: 20px 20px 20px 10px;
     border-radius: 0px 20px 20px 0px;
-    background-color: green;
+    background-color: var(--cor-fundo-nome-cientifico);
 }
 
-/* TABELA DE INFORMAÇÕES */
+/* INICIO TABELA DE INFORMAÇÕES */
 table th {
     text-align: start;
     padding: 0px 30px 0px 0px;
@@ -32,10 +26,7 @@ td {
     border: 1px solid black;
 }
 
-.linha {
-    display: flex;
-    margin-bottom: 30px;
-}
+/* FIM TABELA DE INFORMAÇÕES */
 
 .coluna {
     width: 100%;

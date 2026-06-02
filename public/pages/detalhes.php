@@ -38,15 +38,18 @@ $resultado = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $item['nome_cientifico'] . " / " . $item['nome_popular']; ?></title>
 
-    <!-- FOLHA DE ESTILO MENU -->
-    <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . 'menu-public.css'; ?>">
+    <!-- FOLHA DE ESTILO CSS GLOBAL PUBLIC -->
+    <link rel="stylesheet" href=" <?php echo BASE_URL_CSS_PUBLIC . 'global.css' ?>">
 
-    <!-- FOLHA DE ESTILO PÁGINA -->
+    <!-- FOLHA DE ESTILO CSS MENU -->
+    <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . 'menu-public.css'?>">
+
+    <!-- FOLHA DE ESTILO CSS PÁGINA -->
     <link rel="stylesheet" href="<?php echo BASE_URL_CSS_PUBLIC . "detalhes.css" ?>">
 
 </head>
 
-<body>
+<body class="display-flex">
 
     <?php include '../includes/menu-public.php'; ?>
 
@@ -60,7 +63,7 @@ $resultado = mysqli_query($conn, $sql);
             <?php echo $item['id']; ?>
         </p>
 
-        <div class="linha">
+        <div class="linha display-flex">
             <div class="coluna">
                 <table>
                     <tr>
