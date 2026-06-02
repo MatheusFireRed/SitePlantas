@@ -1,5 +1,4 @@
 :root {
-
     --cor-fundo-nome-cientifico: green;
 }
 
@@ -10,20 +9,40 @@
 }
 
 /* INICIO TABELA DE INFORMAÇÕES */
-table th {
-    text-align: start;
-    padding: 0px 30px 0px 0px;
-}
-
-table{
+table {
     width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-table,
 th,
-tr,
 td {
-    border: 1px solid black;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+th {
+    width: 35%;
+    font-weight: 600;
+    background-color: #f5f5f5;
+}
+
+tr {
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+tr:hover {
+    background-color: #eef8ee;
+    transform: translateX(4px);
+}
+
+tr:not(:last-child) {
+    border-bottom: 1px solid #e5e5e5;
 }
 
 /* FIM TABELA DE INFORMAÇÕES */
